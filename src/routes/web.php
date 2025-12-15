@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\WeightLogController;
 use App\Http\Controllers\TargetWeightController;
+use App\Http\Controllers\ChangeCOntroller;
 
 Route::get('/register/step1', [RegisterController::class, 'showStep1'])->name('register.step1');
 Route::post('/register/step1', [RegisterController::class, 'postStep1'])->name('register.step1.post');
@@ -28,3 +29,5 @@ Route::post('/logout', function () {Auth::logout();
         return redirect('/login');
     })->name('logout');
 });
+Route::get('/weight_logs/goal_setting', [ChangeController::class, 'edit'])->name('target.edit');
+Route::put('/weight_logs/goal_setting', [ChangeController::class, 'update'])-name('target.update');

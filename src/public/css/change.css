@@ -1,0 +1,115 @@
+body {
+    background-color: #f8f8f8;
+    font-family: sans-serif;
+}
+
+/* ---------- ヘッダー ---------- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: white;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #e879f9;
+}
+
+.header-right {
+    display: flex;
+    gap: 15px;
+}
+
+.header-btn {
+    padding: 8px 16px;
+    background: #f3f3f3;
+    border-radius: 6px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
+/* ---------- メイン ---------- */
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 80px);
+}
+
+/* ---------- カード ---------- */
+.change-container {
+    background: white;
+    padding: 40px 50px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 380px;
+}
+
+.change-title {
+    font-size: 22px;
+    margin-bottom: 25px;
+}
+
+/* ---------- 入力 ---------- */
+.input-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.weight-input {
+    width: 180px;
+    padding: 10px;
+    font-size: 18px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.kg {
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.error {
+    color: red;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+/* ---------- ボタン ---------- */
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.back-btn {
+    width: 45%;
+    padding: 10px 0;
+    background: #e5e5e5;
+    border-radius: 8px;
+    text-decoration: none;
+    color: black;
+    font-size: 15px;
+}
+
+.update-btn {
+    width: 45%;
+    padding: 10px 0;
+    background: linear-gradient(to right, #b28bf3, #f9a8d4);
+    border-radius: 8px;
+    border: none;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
