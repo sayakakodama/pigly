@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\TargetWeight;
 
-class ChangeContoroller extends Controller
+class ChangeController extends Controller
 {
     // 目標体重設定画面 表示
     public function edit()

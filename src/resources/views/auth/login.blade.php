@@ -55,7 +55,7 @@
             </form>
 
             <p class="link-text">
-                <a href="{{ route('register.step1') }}">アカウント作成はこちら</a>
+                {{-- <a href="{{ route('register.step1') }}">アカウント作成はこちら</a> --}}
             </p>
         </div>
     </div>

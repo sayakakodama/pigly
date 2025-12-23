@@ -7,6 +7,13 @@ use App\Models\WeightLog;
 
 class RecordController extends Controller
 {
+    // 追加画面表示
+    public function create()
+    {
+        return view('records.create');
+    }
+
+    // 登録処理
     public function store(WeightLogRequest $request)
     {
         WeightLog::create([
@@ -18,7 +25,8 @@ class RecordController extends Controller
             'exercise_content' => $request->exercise_content,
         ]);
 
-        return redirect()->route('weight_logs.show', $weightLog->id)
+        return redirect()
+            ->route('weight_logs.index')
             ->with('success', '登録しました');
     }
 }

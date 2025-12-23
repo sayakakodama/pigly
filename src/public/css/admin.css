@@ -1,397 +1,31 @@
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Hiragino Sans", "ヒラギノ角ゴ ProN W3", "Yu Gothic", "游ゴシック体", sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
-}
-
-/* ========== Header ========== */
-
-.header {
-    background-color: #ffffff;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.header-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 14px 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.header-logo {
-    font-size: 32px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    color: #f39ad5;
-}
-
-.header-actions {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-}
-
-.header-btn,
-.header-btn-outline {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 7px 12px;
-    border-radius: 6px;
-    font-size: 12px;
-    border: none;
-    text-decoration: none;
-    cursor: pointer;
-    background-color: #ffffff;
-    border: 1px solid #dedede;
-}
-
-.header-btn {
-    background-color: #ffffff;
-}
-
-.header-btn-outline {
-    background-color: #f8f8f8;
-}
-
-.header-btn-icon {
-    font-size: 14px;
-}
-
-/* ───── main layout ───── */
-
-.main {
-    padding: 32px 0 40px;
-}
-
-.main-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-/* ========== Summary card ========== */
-
-.summary-card {
-    background-color: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
-    padding: 24px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 28px;
-}
-
-.summary-item {
-    flex: 1;
-    text-align: center;
-}
-
-.summary-label {
-    font-size: 12px;
-    color: #777;
-    margin-bottom: 8px;
-}
-
-.summary-value {
-    font-size: 32px;
-    font-weight: 600;
-}
-
-.summary-unit {
-    font-size: 14px;
-    margin-left: 4px;
-}
-
-.summary-divider {
-    width: 1px;
-    height: 48px;
-    background-color: #eee;
-}
-
-/* ========== Records card ========== */
-
-.records-card {
-    background-color: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
-    padding: 20px 28px 28px;
-}
-
-.records-header {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    align-items: flex-start;
-    margin-bottom: 10px;
-}
-
-/* search area */
-
-.search-form {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-}
-
-.search-range {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.search-field {
-    position: relative;
-}
-
-.search-select {
-    min-width: 150px;
-    padding: 7px 28px 7px 10px;
-    border-radius: 4px;
-    border: 1px solid #dedede;
-    background-color: #f9f9f9;
-    font-size: 12px;
-    appearance: none;
-}
-
-.search-range-separator {
-    font-size: 12px;
-    color: #777;
-}
-
-.search-buttons {
-    display: flex;
-    gap: 6px;
-}
-
-.search-btn {
-    padding: 7px 18px;
-    border-radius: 4px;
-    border: 1px solid #c9c9c9;
-    background-color: #e7e7e7;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-.reset-btn {
-    padding: 7px 14px;
-    border-radius: 4px;
-    border: 1px solid #dedede;
-    background-color: #ffffff;
-    font-size: 12px;
-    cursor: pointer;
-    text-decoration: none;
-    color: #666;
-}
-
-/* add button */
-
-.records-actions {
-    display: flex;
-    align-items: center;
-}
-
-.add-btn {
-    display: inline-block;
-    padding: 9px 24px;
-    border-radius: 20px;
-    font-size: 13px;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    background: linear-gradient(to right, #f7a7d3, #b79df2);
-    color: #ffffff;
-}
-
-/* search info text */
-
-.search-info {
-    font-size: 12px;
-    color: #777;
-    margin: 6px 0 12px;
-}
-
-/* ========== table ========== */
-
-.table-wrapper {
-    overflow-x: auto;
-}
-
-.records-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-}
-
-.records-table thead tr {
-    border-bottom: 2px solid #f1c3e5;
-}
-
-.records-table th,
-.records-table td {
-    padding: 10px 8px;
-    text-align: left;
-}
-
-.records-table tbody tr:nth-child(odd) {
-    background-color: #ffffff;
-}
-
-.records-table tbody tr:nth-child(even) {
-    background-color: #fbfbfb;
-}
-
-.table-edit-column {
-    width: 40px;
-    text-align: center;
-}
-
-.edit-icon {
-    font-size: 14px;
-    text-decoration: none;
-    color: #f39ad5;
-}
-
-.table-empty {
-    text-align: center;
-    color: #888;
-}
-
-/* pagination */
-
-.pagination-area {
-    margin-top: 16px;
-    text-align: center;
-}
-
-.pagination {
-    display: inline-flex;
-    gap: 6px;
-}
-
-/* Laravel default paginationの微調整 */
-.pagination>li>a,
-.pagination>li>span {
-    padding: 4px 9px;
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    font-size: 12px;
-    text-decoration: none;
-    color: #555;
-}
-
-.pagination>.active>span {
-    background-color: #f39ad5;
-    color: #fff;
-    border-color: #f39ad5;
-}
-
-/* small screen */
-
-@media screen and (max-width: 768px) {
-
-    .header-inner,
-    .main-inner {
-        padding: 0 12px;
-    }
-
-    .summary-card {
-        padding: 18px;
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .summary-divider {
-        display: none;
-    }
-
-    .records-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .search-form {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-        /* ========== Custom Pagination ========== */
-    
-        .pagination-area {
-            margin-top: 20px;
-            text-align: center;
-        }
-    
-        .pagination {
-            display: inline-flex;
-            gap: 8px;
-            list-style: none;
-            padding: 0;
-        }
-    
-        .pagination li {
-            display: inline-block;
-        }
-    
-        .pagination li a,
-        .pagination li span {
-            display: inline-block;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            border: 1px solid #e1e1e1;
-            line-height: 34px;
-            text-align: center;
-            font-size: 13px;
-            text-decoration: none;
-            color: #555;
-            background-color: #fff;
-            transition: all 0.15s ease;
-        }
-    
-        /* ホバー */
-        .pagination li a:hover {
-            background-color: #f7a7d3;
-            color: #fff;
-            border-color: #f7a7d3;
-        }
-    
-        /* アクティブ */
-        .pagination li.active span {
-            background: linear-gradient(to right, #f7a7d3, #b79df2);
-            color: #fff;
-            border: none;
-        }
-    
-        /* 前へ/次へ（disabled時） */
-        .pagination li.disabled span {
-            color: #ccc;
-            border-color: #eee;
-        }
-
-/* ==================== モーダル ==================== */
-
+/* ===== modal ===== */
 .modal-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.35);
-    display: none;
-    /* 非表示から開始 */
+    inset: 0;
+    background: rgba(0, 0, 0, .45);
+    display: flex;
+    /* ← 最初から flex */
     justify-content: center;
     align-items: center;
-    z-index: 999;
+    z-index: 9999;
+
+    visibility: hidden;
+    /* ← 非表示制御はこっち */
+    opacity: 0;
+    pointer-events: none;
 }
 
-.modal-content {
-    width: 480px;
-    background: #ffffff;
+.modal-overlay.is-active {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-box {
+    width: 560px;
+    background: #fff;
     border-radius: 14px;
     padding: 28px 32px;
-    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.15);
 }
 
 .modal-title {
@@ -399,93 +33,67 @@ body {
     margin-bottom: 20px;
 }
 
-/* フォーム */
-.modal-form-group {
+.form-group {
     margin-bottom: 18px;
 }
 
-.modal-form-group label {
-    font-size: 14px;
-    font-weight: 600;
+.form-group label {
     display: block;
+    font-size: 13px;
     margin-bottom: 6px;
 }
 
 .required {
-    color: #e76b6b;
-    font-size: 12px;
+    background: #ff6b6b;
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 4px;
 }
 
-.modal-form-group input,
-.modal-form-group textarea {
+.unit-input {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.unit-input input,
+textarea {
     width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #ddd;
+    padding: 9px;
     border-radius: 6px;
-    font-size: 14px;
+    border: 1px solid #ddd;
 }
 
-.modal-form-group textarea {
+textarea {
     height: 90px;
 }
 
-.modal-input-unit {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.unit {
-    font-size: 13px;
-    color: #777;
-}
-
 .error {
-    color: #e76b6b;
+    color: #ff6b6b;
     font-size: 12px;
     margin-top: 4px;
 }
 
 .modal-buttons {
-    margin-top: 30px;
     display: flex;
     justify-content: space-between;
+    margin-top: 26px;
 }
 
-.modal-cancel {
+.btn-cancel {
     width: 45%;
-    padding: 10px;
+    background: #e0e0e0;
     border-radius: 20px;
+    padding: 10px;
     border: none;
-    color: #555;
-    background-color: #eee;
-    cursor: pointer;
 }
 
-.modal-submit {
+.btn-submit {
     width: 45%;
-    padding: 10px;
-    border-radius: 20px;
-    border: none;
-    color: #fff;
     background: linear-gradient(to right, #f7a7d3, #b79df2);
-    cursor: pointer;
-}
-
-/* モーダル表示時のアニメーション（任意） */
-.modal-content {
-    animation: fadeIn .25s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        transform: scale(0.95);
-        opacity: 0;
-    }
-
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
+    color: #fff;
+    border-radius: 20px;
+    padding: 10px;
+    border: none;
 }
