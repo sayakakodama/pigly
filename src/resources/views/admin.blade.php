@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v={{ time() }}">
+
 </head>
 <body>
 
+{{-- ===== ヘッダー ===== --}}
 <header class="header">
     <div class="header-inner">
         <h1 class="logo">PiGLy</h1>
@@ -34,40 +36,62 @@
     <section class="summary-card">
         <div class="summary-item">
             <p class="summary-label">目標体重</p>
-            <p class="summary-value">{{ number_format($summary['target_weight'],1) }}<span>kg</span></p>
+            <p class="summary-value">
+                {{ number_format($summary['target_weight'], 1) }}<span>kg</span>
+            </p>
         </div>
 
         <div class="summary-divider"></div>
 
         <div class="summary-item">
             <p class="summary-label">目標まで</p>
-            <p class="summary-value">{{ number_format($summary['to_target'],1) }}<span>kg</span></p>
+            <p class="summary-value">
+                {{ number_format($summary['to_target'], 1) }}<span>kg</span>
+            </p>
         </div>
 
         <div class="summary-divider"></div>
 
         <div class="summary-item">
             <p class="summary-label">最新体重</p>
-            <p class="summary-value">{{ number_format($summary['latest_weight'],1) }}<span>kg</span></p>
+            <p class="summary-value">
+                {{ number_format($summary['latest_weight'], 1) }}<span>kg</span>
+            </p>
         </div>
     </section>
 
     {{-- ===== 一覧 ===== --}}
     <section class="records-card">
 
+        {{-- 検索 + 追加 --}}
         <div class="records-header">
-            <form class="search-form">
-                <input type="date" class="search-input">
+            <form method="GET" action="{{ route('weight_logs.index') }}" class="search-form">
+                <input type="date" name="from" value="{{ request('from') }}">
                 <span>〜</span>
-                <input type="date" class="search-input">
-                <button class="search-btn">検索</button>
-            </form>
+                <input type="date" name="to" value="{{ request('to') }}">
+                <button type="submit" class="search-btn">検索</button>
+
+                @if(request()->filled('from') || request()->filled('to'))
+                <button type="button" class="reset-btn"onclick="location.href='{{ route('weight_logs.index') }}'">
+                リセット
+                </button>
+            @endif
+        </form>
 
             <button type="button" class="add-btn" id="openModalBtn">
                 データ追加
             </button>
         </div>
 
+        {{-- 検索情報 --}}
+        @if ($searchInfo)
+            <p class="search-info">
+                {{ $searchInfo['from'] }} 〜 {{ $searchInfo['to'] }}
+                ：{{ $searchInfo['count'] }}件
+            </p>
+        @endif
+
+        {{-- 一覧テーブル --}}
         <table class="records-table">
             <thead>
                 <tr>
@@ -79,17 +103,31 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($records as $record)
-                <tr>
-                    <td>{{ $record->date->format('Y/m/d') }}</td>
-                    <td>{{ $record->weight }}kg</td>
-                    <td>{{ $record->calories }}cal</td>
-                    <td>{{ $record->exercise_time }}</td>
-                    <td class="edit">✏︎</td>
-                </tr>
-                @endforeach
+                @forelse ($records as $record)
+                    <tr>
+                        <td>{{ $record->date->format('Y/m/d') }}</td>
+                        <td>{{ $record->weight }}kg</td>
+                        <td>{{ $record->calories }}cal</td>
+                        <td>{{ $record->exercise_time }}</td>
+                        <td class="table-edit-column">
+    <a href="{{ route('records.edit', $record->id) }}" class="edit-icon">✏︎</a>
+</td>
+
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="5" class="no-data">
+                            該当するデータがありません
+                        </td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
+
+        {{-- ページネーション --}}
+        <div class="pagination">
+            {{ $records->links() }}
+        </div>
 
     </section>
 </div>
@@ -102,13 +140,15 @@
 
         <h2 class="modal-title">Weight Logを追加</h2>
 
-        <form action="{{ route('records.store') }}" method="POST">
+        <form action="{{ route('weight_logs.store') }}" method="POST">
             @csrf
 
             <div class="form-group">
                 <label>日付 <span class="required">必須</span></label>
                 <input type="date" name="date" value="{{ old('date') }}">
-                @error('date') <p class="error">{{ $message }}</p> @enderror
+                @error('date')
+                    <p class="error">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="form-group">
@@ -117,7 +157,9 @@
                     <input type="text" name="weight" value="{{ old('weight') }}">
                     <span>kg</span>
                 </div>
-                @error('weight') <p class="error">{{ $message }}</p> @enderror
+                @error('weight')
+                    <p class="error">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="form-group">
@@ -126,26 +168,34 @@
                     <input type="text" name="calories" value="{{ old('calories') }}">
                     <span>cal</span>
                 </div>
-                @error('calories') <p class="error">{{ $message }}</p> @enderror
+                @error('calories')
+                    <p class="error">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="form-group">
                 <label>運動時間 <span class="required">必須</span></label>
                 <input type="time" name="exercise_time" value="{{ old('exercise_time') }}">
-                @error('exercise_time') <p class="error">{{ $message }}</p> @enderror
+                @error('exercise_time')
+                    <p class="error">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="form-group">
                 <label>運動内容</label>
                 <textarea name="exercise_content">{{ old('exercise_content') }}</textarea>
+
+                @error('exercise_content')
+                  <p class="error">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="modal-buttons">
                 <button type="button" class="btn-cancel" id="closeModalBtn">戻る</button>
                 <button type="submit" class="btn-submit">登録</button>
             </div>
-
         </form>
+
     </div>
 </div>
 
@@ -170,12 +220,11 @@ modal.addEventListener('click', (e) => {
 });
 </script>
 
-
-{{-- ===== バリデーションエラー時は自動で再表示 ===== --}}
+{{-- バリデーションエラー時：自動でモーダル再表示 --}}
 @if ($errors->any())
 <script>
     window.onload = () => {
-        document.getElementById('weightLogModal').style.display = 'flex';
+        document.getElementById('weightLogModal').classList.add('is-active');
     };
 </script>
 @endif

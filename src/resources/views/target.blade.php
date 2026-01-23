@@ -32,8 +32,9 @@
 
         <h2 class="title">目標体重設定</h2>
 
-        <form action="{{ route('target.update') }}" method="POST" class="form">
-            @csrf
+        <form action="{{ route('goal_setting.update') }}" method="POST" class="form">
+        @csrf
+
 
             <div class="form-group">
                 <input

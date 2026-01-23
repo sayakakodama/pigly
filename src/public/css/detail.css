@@ -1,80 +1,212 @@
 body {
-    background: #f8f8f8;
-    font-family: "Hiragino Sans", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial,
+        "Hiragino Sans", "ヒラギノ角ゴ ProN W3", "Yu Gothic", "游ゴシック体", sans-serif;
+    background: #f5f5f5;
+    color: #333;
 }
 
-.detail-main {
-    display: flex;
-    justify-content: center;
-    padding: 60px 0;
+/* ===== Header ===== */
+.header {
+    background: #fff;
+    border-bottom: 1px solid #e5e5e5;
 }
 
-.detail-card {
-    width: 700px;
-    background: white;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.detail-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 30px;
-}
-
-.form-group {
-    margin-bottom: 24px;
-}
-
-input,
-textarea,
-select {
-    width: 100%;
-    padding: 14px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    background: #fafafa;
-}
-
-textarea {
-    height: 120px;
-}
-
-.input-unit {
-    display: flex;
-    align-items: center;
-}
-
-.unit {
-    margin-left: 8px;
-    color: gray;
-}
-
-.detail-buttons {
-    margin-top: 30px;
+.header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 14px 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+.header-logo {
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: .16em;
+    color: #f39ad5;
+    margin: 0;
+}
+
+.header-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.header-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    border: 1px solid #dedede;
+    background: #fff;
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+}
+
+.header-btn-outline {
+    background: #f8f8f8;
+}
+
+.header-btn-icon {
+    font-size: 14px;
+}
+
+.logout-form {
+    margin: 0;
+}
+
+/* ===== Main ===== */
+.detail-main {
+    padding: 70px 0 90px;
+    display: flex;
+    justify-content: center;
+}
+
+.detail-card {
+    width: 760px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 38px 44px 34px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, .06);
+}
+
+.detail-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 18px;
+}
+
+/* ===== Form ===== */
+.form-group {
+    margin-top: 16px;
+}
+
+.form-label {
+    display: block;
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #e3e3e3;
+    border-radius: 6px;
+    background: #fafafa;
+    font-size: 14px;
+    color: #333;
+}
+
+.form-textarea {
+    height: 160px;
+    resize: none;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: #c9b6ff;
+    background: #fff;
+}
+
+.input-unit {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-unit .form-input {
+    flex: 1;
+    min-width: 0;
+}
+
+.unit {
+    font-size: 14px;
+    color: #777;
+    white-space: nowrap;
+}
+
+/* ===== Error ===== */
+.error {
+    color: #ff6b6b;
+    font-size: 12px;
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+.is-error {
+    border-color: #ff6b6b !important;
+    background: #fff;
+}
+
+/* ===== Buttons ===== */
+.detail-actions {
+    margin-top: 26px;
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    /* 戻る / 更新 / 🗑 */
+    align-items: center;
+    gap: 18px;
+}
+
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 44px;
+    border-radius: 22px;
+    padding: 0 34px;
+    text-decoration: none;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+
 .btn-gray {
-    padding: 10px 30px;
-    border-radius: 8px;
-    background: #e0e0e0;
+    background: #e6e6e6;
+    color: #333;
 }
 
 .btn-gradient {
-    padding: 10px 30px;
-    border-radius: 8px;
     background: linear-gradient(to right, #7e8bff, #ff9ecb);
-    color: white;
+    color: #fff;
+}
+
+.delete-form {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .btn-delete {
-    background: none;
+    background: transparent;
     border: none;
-    font-size: 20px;
-    color: #d9534f;
+    color: #ff6b6b;
+    font-size: 22px;
     cursor: pointer;
+    padding: 8px 10px;
+    line-height: 1;
+}
+
+@media (max-width: 900px) {
+    .detail-card {
+        width: calc(100% - 24px);
+        padding: 28px 18px;
+    }
+
+    .detail-actions {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+    }
+
+    .delete-form {
+        grid-column: 2 / 3;
+        justify-content: flex-end;
+    }
 }

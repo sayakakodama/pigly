@@ -18,9 +18,9 @@ class RegisterController extends Controller
     {
         // STEP1の入力をセッションに保存
         session([
-            'register.name' => $request->name,
-            'register.email' => $request->email,
-            'register.password' => $request->password,
+            'register.name' => $request->input('name'),
+            'register.email' => $request->input('email'),
+            'register.password' => $request->input('password'),
         ]);
 
         return redirect()->route('register.step2.show');
@@ -33,22 +33,18 @@ class RegisterController extends Controller
 
     public function storeStep2(Register2Request $request, CreateNewUser $creator)
     {
-        // Fortifyを使ってユーザー作成（←ここが超重要）
+        // Fortifyを使ってユーザー作成
         $user = $creator->create([
             'name' => session('register.name'),
             'email' => session('register.email'),
             'password' => session('register.password'),
         ]);
 
-        // 作成後すぐログイン
         Auth::login($user);
 
-        // 体重データ保存（例）
-        // WeightLog::create([...]);
-
-        // セッション削除
         session()->forget('register');
 
         return redirect('/weight_logs');
     }
+
 }

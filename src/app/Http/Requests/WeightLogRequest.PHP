@@ -8,36 +8,58 @@ class WeightLogRequest extends FormRequest
 {
     public function authorize()
     {
-        return true; // 認可OK
+        return true;
     }
 
     public function rules()
     {
         return [
             'date' => ['required', 'date'],
-            'weight' => ['required', 'numeric', 'between:0,300'],
+
+            // 体重：必須 / 数値 / 0〜9999 / 小数1桁まで
+            'weight' => [
+                'required',
+                'numeric',
+                'min:0',
+                'max:9999',
+                'regex:/^\d{1,4}(\.\d{1})?$/',
+            ],
+
+            // 摂取カロリー：必須 / 数字（整数）
             'calories' => ['required', 'integer', 'min:0'],
+
+            // 運動時間：必須（time input想定）
             'exercise_time' => ['required'],
-            'exercise_content' => ['nullable', 'string', 'max:200'],
+
+            // 運動内容：任意 / 120文字以内
+            'exercise_content' => ['nullable', 'string', 'max:120'],
         ];
     }
 
     public function messages()
     {
         return [
-            'date.required' => '日付は必須です。',
-            'date.date' => '正しい日付を選択してください。',
+            // 日付
+            'date.required' => '日付を入力してください',
+            'date.date' => '日付を正しく入力してください',
 
-            'weight.required' => '体重は必須です。',
-            'weight.numeric' => '体重は数値で入力してください。',
-            'weight.between' => '体重は0〜300kgの範囲で入力してください。',
+            // 体重
+            'weight.required' => '体重を入力してください',
+            'weight.numeric' => '4桁までの数字で入力してください',
+            'weight.max' => '4桁までの数字で入力してください',
+            'weight.regex' => '小数点は1桁で入力してください',
+            'weight.min' => '4桁までの数字で入力してください',
 
-            'calories.required' => '摂取カロリーは必須です。',
-            'calories.integer' => 'カロリーは整数で入力してください。',
+            // カロリー
+            'calories.required' => '摂取カロリーを入力してください',
+            'calories.integer' => '数字で入力してください',
+            'calories.min' => '数字で入力してください',
 
-            'exercise_time.required' => '運動時間は必須です。',
+            // 運動時間
+            'exercise_time.required' => '運動時間を入力してください',
 
-            'exercise_content.max' => '運動内容は120文字以内で入力してください。',
+            // 運動内容
+            'exercise_content.max' => '120文字以内で入力してください',
         ];
     }
 }

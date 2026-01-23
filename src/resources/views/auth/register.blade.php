@@ -15,8 +15,9 @@
         <p class="step-text">アカウント情報の登録</p>
 
         {{-- ★ Fortifyの正解 --}}
-        <form method="POST" action="/register" novalidate>
-            @csrf
+        <form method="POST" action="{{ route('register.step1.post') }}" novalidate>
+        @csrf
+
 
             <div class="form-group">
                 <label for="name">お名前</label>
@@ -42,7 +43,7 @@
                 @enderror
             </div>
 
-            <button type="submit" class="submit-btn">アカウント作成</button>
+            <button type="submit" class="submit-btn">次に進む</button>
 
             <p class="login-link">
                 <a href="/login">ログインはこちら</a>

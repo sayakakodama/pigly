@@ -25,7 +25,7 @@
                 <div class="form-group @error('email') has-error @enderror">
                     <label for="email">メールアドレス</label>
                     <input
-                        type="email"
+                        type="text"
                         id="email"
                         name="email"
                         value="{{ old('email') }}"
@@ -55,7 +55,7 @@
             </form>
 
             <p class="link-text">
-                {{-- <a href="{{ route('register.step1') }}">アカウント作成はこちら</a> --}}
+                <a href="{{ route('register.step1') }}">アカウント作成はこちら</a>
             </p>
         </div>
     </div>

@@ -9,36 +9,46 @@ class AdminController extends Controller
 {
     public function index(Request $request)
     {
-        $targetWeight = 45.0;
+        // 仮の目標体重（※後でDB化してOK）
+        $targetWeight = auth()->user()->target_weight ?? 0;
+
+        // 検索条件
         $from = $request->input('from');
         $to   = $request->input('to');
 
-        $query = WeightLog::query()->orderByDesc('date');
+        // ===== 一覧クエリ =====
+        $query = WeightLog::where('user_id', auth()->id())
+            ->orderByDesc('date');
 
         if ($from) {
             $query->whereDate('date', '>=', $from);
         }
+
         if ($to) {
             $query->whereDate('date', '<=', $to);
         }
 
-        $records = $query->paginate(8);
+        $records = $query
+            ->paginate(8)
+            ->withQueryString(); // ← 検索条件をページ送りでも保持
 
-        $latest = WeightLog::orderByDesc('date')->first();
-        $latestWeight = $latest ? $latest->weight : 0;
+        // ===== 最新体重 =====
+        $latest = WeightLog::where('user_id', auth()->id())
+            ->orderByDesc('date')
+            ->first();
 
+        $latestWeight = $latest?->weight ?? 0;
+
+        // ===== サマリー =====
         $summary = [
             'target_weight' => $targetWeight,
             'latest_weight' => $latestWeight,
-            'to_target'     => $latestWeight - $targetWeight,
+            'to_target'     => $targetWeight - $latestWeight
         ];
 
-        $dateOptions = WeightLog::orderByDesc('date')
-            ->limit(30)
-            ->pluck('date')
-            ->map(fn ($d) => $d->format('Y-m-d'));
-
+        // ===== 検索情報表示用 =====
         $searchInfo = null;
+
         if ($from || $to) {
             $searchInfo = [
                 'from'  => $from ?: '指定なし',
@@ -47,6 +57,10 @@ class AdminController extends Controller
             ];
         }
 
-        return view('admin', compact('summary', 'records', 'dateOptions', 'searchInfo'));
+        return view('admin', compact(
+            'summary',
+            'records',
+            'searchInfo'
+        ));
     }
 }

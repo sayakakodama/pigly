@@ -14,7 +14,7 @@
     </div>
 
     <div class="header-right">
-        <a href="{{ route('target.edit') }}" class="header-btn">
+        <a href="{{ route('goal_setting.edit') }}" class="header-btn">
             ⚙ 目標体重設定
         </a>
         <form action="{{ route('logout') }}" method="POST">
@@ -28,7 +28,7 @@
     <div class="change-container">
         <h2 class="change-title">目標体重設定</h2>
 
-        <form action="{{ route('target.update') }}" method="POST" class="change-form">
+        <form action="{{ route('goal_setting.update') }}" method="POST" class="change-form">
             @csrf
             @method('PUT')
 
