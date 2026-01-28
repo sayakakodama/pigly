@@ -4,32 +4,33 @@ namespace App\Actions\Fortify;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 
 class CreateNewUser implements CreatesNewUsers
 {
-    use PasswordValidationRules;
-
-    /**
-     * Validate and create a newly registered user.
-     *
-     * @param  array<string, string>  $input
-     */
-    public function create(array $input): User
+    public function create(array $input)
     {
-        Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique(User::class),
-            ],
-            'password' => $this->passwordRules(),
-        ])->validate();
+        try {
+            Validator::make($input, [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                // ここが厳しい可能性が高い（プロジェクトによって rules が違う）
+                'password' => ['required', 'string', 'min:8'],
+            ])->validate();
+        } catch (ValidationException $e) {
+            Log::error('FORTIFY VALIDATION ERROR', [
+                'errors' => $e->errors(),
+                'input' => [
+                    'name' => $input['name'] ?? null,
+                    'email' => $input['email'] ?? null,
+                    'password_len' => isset($input['password']) ? strlen($input['password']) : null,
+                ],
+            ]);
+            throw $e;
+        }
 
         return User::create([
             'name' => $input['name'],

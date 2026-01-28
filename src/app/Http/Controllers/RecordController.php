@@ -59,7 +59,7 @@ class RecordController extends Controller
         ]);
 
         return redirect()
-            ->route('weight_logs.show', $record->id)
+            ->route('weight_logs.index')
             ->with('success', '更新しました');
     }
 

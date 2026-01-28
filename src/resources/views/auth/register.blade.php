@@ -12,7 +12,7 @@
     <div class="register-container">
         <h1 class="logo">PiGLy</h1>
         <h2 class="title">新規会員登録</h2>
-        <p class="step-text">アカウント情報の登録</p>
+        <p class="step-text">STEP1 アカウント情報の登録</p>
 
         {{-- ★ Fortifyの正解 --}}
         <form method="POST" action="{{ route('register.step1.post') }}" novalidate>

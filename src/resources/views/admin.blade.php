@@ -108,7 +108,9 @@
                         <td>{{ $record->date->format('Y/m/d') }}</td>
                         <td>{{ $record->weight }}kg</td>
                         <td>{{ $record->calories }}cal</td>
-                        <td>{{ $record->exercise_time }}</td>
+                        <td>{{ $record->exercise_time ? \Carbon\Carbon::parse($record->exercise_time)->format('H:i') : '' }}
+</td>
+
                         <td class="table-edit-column">
     <a href="{{ route('records.edit', $record->id) }}" class="edit-icon">✏︎</a>
 </td>
@@ -145,7 +147,10 @@
 
             <div class="form-group">
                 <label>日付 <span class="required">必須</span></label>
-                <input type="date" name="date" value="{{ old('date') }}">
+                <input type="date"
+                name="date" value="{{ old('date', \Carbon\Carbon::now()->format('Y-m-d')) }}"
+>
+
                 @error('date')
                     <p class="error">{{ $message }}</p>
                 @enderror

@@ -11,21 +11,19 @@ class Register2Request extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'current_weight' => is_string($this->current_weight) ? trim($this->current_weight) : $this->current_weight,
+            'target_weight'  => is_string($this->target_weight)  ? trim($this->target_weight)  : $this->target_weight,
+        ]);
+    }
+
     public function rules()
     {
         return [
-            'current_weight' => [
-                'required',
-                'numeric',
-                'max:9999.9', // 4桁まで
-                'regex:/^\d+(\.\d{1})?$/', // 小数点1桁
-            ],
-            'target_weight' => [
-                'required',
-                'numeric',
-                'max:9999.9',
-                'regex:/^\d+(\.\d{1})?$/',
-            ],
+            'current_weight' => ['required', 'numeric', 'between:1,999.9'],
+            'target_weight'  => ['required', 'numeric', 'between:1,999.9'],
         ];
     }
 
@@ -33,14 +31,5 @@ class Register2Request extends FormRequest
     {
         return [
             'current_weight.required' => '現在の体重を入力してください',
-            'current_weight.numeric' => '数値で入力してください',
-            'current_weight.max' => '4桁までの数字で入力してください',
-            'current_weight.regex' => '小数点は1桁で入力してください',
-
-            'target_weight.required' => '目標の体重を入力してください',
-            'target_weight.numeric' => '数値で入力してください',
-            'target_weight.max' => '4桁までの数字で入力してください',
-            'target_weight.regex' => '小数点は1桁で入力してください',
-        ];
-    }
-}
+            'current_weight.numeric'  => '数値で入力してください',
+            'current_weight.between'  => '1〜9_

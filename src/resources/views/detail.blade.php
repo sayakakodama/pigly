@@ -10,22 +10,19 @@
 </head>
 <body>
 
+{{-- ===== ヘッダー ===== --}}
 <header class="header">
     <div class="header-inner">
-        <h1 class="header-logo">PiGLy</h1>
+        <h1 class="logo">PiGLy</h1>
 
         <div class="header-actions">
             <a href="{{ route('goal_setting.edit') }}" class="header-btn">
-                <span class="header-btn-icon">⚙</span>
-                目標体重設定
+                ⚙ 目標体重設定
             </a>
 
-            <form action="{{ route('logout') }}" method="POST" class="logout-form">
+            <form action="{{ route('logout') }}" method="POST">
                 @csrf
-                <button type="submit" class="header-btn header-btn-outline">
-                    <span class="header-btn-icon">⏻</span>
-                    ログアウト
-                </button>
+                <button type="submit" class="header-btn">⏻ ログアウト</button>
             </form>
         </div>
     </div>
@@ -115,6 +112,8 @@
                 <a href="{{ route('weight_logs.index') }}" class="btn btn-gray">戻る</a>
 
                 <button type="submit" class="btn btn-gradient">更新</button>
+            </div>
+          </form>
 
                 <form action="{{ route('records.destroy', $weightLog->id) }}"
                       method="POST"
